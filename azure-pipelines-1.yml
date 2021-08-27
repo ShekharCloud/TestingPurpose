@@ -50,7 +50,7 @@ stages:
         script: |
           sleep 30
 - stage: GitTagRelease 
-  displayName: 'GIT-Release'
+  displayName: 'GIT Release'
   dependsOn: Deploy
   condition: succeeded()
   jobs: 
