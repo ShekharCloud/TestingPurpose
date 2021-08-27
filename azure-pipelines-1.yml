@@ -48,7 +48,10 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          sleep 30 
+          sleep 30
+- stage: tagging
+  displayName: tagging
+  jobs: 
   - job: Tagging
     displayName: Tagging
     steps: 
