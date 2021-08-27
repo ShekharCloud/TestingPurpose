@@ -61,6 +61,6 @@ stages:
         gitHubConnection: ShekharCloud
         repositoryName: ShekharCloud/TestingPurpose
         tagSource: userSpecifiedTag
-        tag: '$(Release.EnvironmentName)-$(Release.ReleaseName)'
-        title: '$(Release.EnvironmentName)-$(Release.ReleaseName)'
+        tag: '$(Build.BuildNumber)_$(Build.BuildId)'
+        title: '$(Build.BuildNumber)_$(Build.BuildId)'
         isPreRelease: true
