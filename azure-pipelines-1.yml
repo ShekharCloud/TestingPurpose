@@ -43,7 +43,6 @@ stages:
   jobs:  
   - job: Deploy
     displayName: Deploy
-    steps:
     - steps:
       - task: Bash@3
         inputs:
