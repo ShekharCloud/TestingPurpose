@@ -54,7 +54,7 @@ stages:
   dependsOn: Deploy
   condition: succeeded()
   jobs: 
-  - job: GIT-Release
+  - job: GITRelease
     displayName: 'GIT Release'
     pool: 'ubuntu-18.04'
     steps:
