@@ -1,0 +1,66 @@
+# temporarily disable trigger during pipeline development
+trigger: none 
+pr: none
+    
+resources:
+- repo: self
+
+
+pool:
+  vmImage: 'ubuntu-18.04'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:  
+  - job: Build
+    displayName: Build
+    steps:
+    - task: DownloadSecureFile@1
+      displayName: Download abc.yml
+      inputs:
+        secureFile: 'abc.yml'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          sleep 30 
+  - job: waitForValidation
+    dependsOn: 'Build'
+    displayName: Wait for external validation  
+    pool: server    
+    timeoutInMinutes: 4320 # job times out in 3 day
+    steps:   
+    - task: ManualValidation@0
+      timeoutInMinutes: 1440 # task times out in 1 day
+      inputs:
+        notifyUsers: |
+          shekhar.bp@commscope.com
+        instructions: 'Please validate the build configuration and resume'
+        onTimeout: 'reject'
+- stage: Deploy
+  displayName: Deploy
+  jobs:  
+  - job: Deploy
+    displayName: Deploy
+    steps:
+    - steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: |
+            sleep 30 
+  - job: Tagging
+    displayName: Tagging
+    steps: 
+    - task: GitHubRelease@1
+      steps:
+- task: GitHubRelease@1
+  displayName: 'GitHub release (create)'
+  inputs:
+    gitHubConnection: ShekharCloud
+    repositoryName: ShekharCloud/TestingPurpose
+    tagSource: userSpecifiedTag
+    tag: '$(Release.EnvironmentName)-$(Release.ReleaseName)'
+    title: '$(Release.EnvironmentName)-$(Release.ReleaseName)'
+    isPreRelease: true
