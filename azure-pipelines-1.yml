@@ -1,5 +1,5 @@
 # temporarily disable trigger during pipeline development
-trigger: none 
+trigger: staging 
 pr: none
     
 resources:
