@@ -55,7 +55,7 @@ stages:
   condition: succeeded()
   jobs: 
   - job: GIT-Release
-    displayName: 'GIT-Release'
+    displayName: 'GIT Release'
     pool: 'ubuntu-18.04'
     steps:
     - task: GitHubRelease@1
