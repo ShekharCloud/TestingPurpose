@@ -49,7 +49,7 @@ stages:
         targetType: 'inline'
         script: |
           sleep 30
- stage: GitTagRelease 
+- stage: GitTagRelease 
   displayName: 'GIT-Release'
   dependson: Deploy
   condition: succeeded()
