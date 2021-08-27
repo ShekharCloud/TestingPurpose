@@ -64,3 +64,10 @@ stages:
         tag: '$(Build.BuildNumber)_$(Build.BuildId)'
         title: '$(Build.BuildNumber)_$(Build.BuildId)'
         isPreRelease: true
+    - task: dtzar.git-merge.git-merge-task.gitMerge@0
+      displayName: 'Merge code to master branch'
+      inputs:
+        mergeType: merge
+        targetBranch: main
+        repoUrl: 'https://github.com/ShekharCloud/TestingPurpose'
+        pat: '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'
