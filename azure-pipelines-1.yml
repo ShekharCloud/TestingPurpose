@@ -49,25 +49,23 @@ stages:
         targetType: 'inline'
         script: |
           sleep 30
-- stage: tagging
-  displayName: tagging
+ stage: GitTagRelease 
+  displayName: 'GIT-Release'
+  dependson: Deploy
+  condition: succeeded()
   jobs: 
-  - job: Tagging
-    displayName: Tagging
-    steps: 
+  - job: GIT-Release
+    displayName: 'GIT-Release'
+    pool: 'ubuntu-18.04'
+    steps:
     - task: GitHubRelease@1
-      displayName: 'GitHub release (create)'
+      displayName: 'Create GitHub release & tag'
       inputs:
-        gitHubConnection: ShekharCloud
-        repositoryName: ShekharCloud/TestingPurpose
+        gitHubConnection: 'ShekharCloud'
+        repositoryName: 'ShekharCloud/TestingPurpose'
         tagSource: userSpecifiedTag
         tag: '$(Build.BuildNumber)_$(Build.BuildId)'
         title: '$(Build.BuildNumber)_$(Build.BuildId)'
+        releaseNotesSource: inline
+        releaseNotesInline: 'Post to UAT deployment and validation, GIT Tag & Release created through pipeline setup"'
         isPreRelease: true
-    - task: dtzar.git-merge.git-merge-task.gitMerge@0
-      displayName: 'Merge code to master branch'
-      inputs:
-        mergeType: merge
-        targetBranch: main
-        repoUrl: 'https://github.com/ShekharCloud/TestingPurpose'
-        pat: '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'
