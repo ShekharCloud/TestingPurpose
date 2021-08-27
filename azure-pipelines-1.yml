@@ -51,7 +51,7 @@ stages:
           sleep 30
 - stage: GitTagRelease 
   displayName: 'GIT-Release'
-  dependson: Deploy
+  dependsOn: Deploy
   condition: succeeded()
   jobs: 
   - job: GIT-Release
