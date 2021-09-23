@@ -1,13 +1,13 @@
 # temporarily disable trigger during pipeline development
 trigger:
-- qa
-- uat
-pr: none
+  branches:
+    include:
+    - qa
+    
+
     
 steps:
 
 - template: azure-pipelines-qa.yml
 
-- template: azure-pipelines-uat.yml
- 
-- template: azure-pipelines-preprod.yml
+
