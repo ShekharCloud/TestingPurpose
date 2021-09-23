@@ -1,5 +1,5 @@
 # temporarily disable trigger during pipeline development
-trigger: none 
+trigger: none
 pr: none
     
 resources:
@@ -49,18 +49,23 @@ stages:
         targetType: 'inline'
         script: |
           sleep 30
-- stage: tagging
-  displayName: tagging
+- stage: GitTagRelease 
+  displayName: 'GIT Release'
+  dependsOn: Deploy
+  condition: succeeded()
   jobs: 
-  - job: Tagging
-    displayName: Tagging
-    steps: 
+  - job: GITRelease
+    displayName: 'GIT Release'
+    pool: 'Azure Pipelines'
+    steps:
     - task: GitHubRelease@1
-      displayName: 'GitHub release (create)'
+      displayName: 'Create GitHub release & tag'
       inputs:
-        gitHubConnection: ShekharCloud
-        repositoryName: ShekharCloud/TestingPurpose
+        gitHubConnection: 'ShekharCloud'
+        repositoryName: 'ShekharCloud/TestingPurpose'
         tagSource: userSpecifiedTag
         tag: '$(Build.BuildNumber)_$(Build.BuildId)'
         title: '$(Build.BuildNumber)_$(Build.BuildId)'
+        releaseNotesSource: inline
+        releaseNotesInline: 'Post to UAT deployment and validation, GIT Tag & Release created through pipeline setup"'
         isPreRelease: true
