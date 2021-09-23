@@ -4,7 +4,7 @@ trigger:
     include:
     - qa 
        
-steps:
+stages:
 - template: azure-pipelines-qa.yml
 
 
