@@ -1,35 +1,13 @@
 # temporarily disable trigger during pipeline development
-trigger: none 
+trigger:
+- qa
+- uat
 pr: none
     
-resources:
-- repo: self
+steps:
 
+- template: azure-pipelines-qa.yml
 
-pool:
-  vmImage: 'ubuntu-18.04'
-
-stages:
-- stage: Build
-  displayName: Build
-  jobs:  
-  - job: Build
-    displayName: Build
-    steps:
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          sleep 30 
-- stage: Deploy
-  displayName: Deploy
-  jobs:  
-  - job: Deploy
-    displayName: Deploy
-    steps:
-    - steps:
-      - task: Bash@3
-        inputs:
-          targetType: 'inline'
-          script: |
-            sleep 30 
+- template: azure-pipelines-uat.yml
+ 
+- template: azure-pipelines-preprod.yml
