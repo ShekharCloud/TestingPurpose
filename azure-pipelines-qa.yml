@@ -5,10 +5,6 @@ trigger: none
 resources:
 - repo: self
 
-
-pool:
-  vmImage: 'ubuntu-18.04'
-
 stages:
 - stage: Build
   displayName: Build
@@ -26,9 +22,9 @@ stages:
   jobs:  
   - job: Deploy
     displayName: Deploy
-    - steps:
-      - task: Bash@3
-        inputs:
-          targetType: 'inline'
-          script: |
-            sleep 30 
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          sleep 30 
