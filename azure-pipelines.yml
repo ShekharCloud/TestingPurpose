@@ -3,6 +3,6 @@ trigger:
 - qa
        
 extends:
-- template: azure-pipelines-qa.yml
+  template: azure-pipelines-qa.yml
 
 
