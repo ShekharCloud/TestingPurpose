@@ -1,13 +1,10 @@
 # temporarily disable trigger during pipeline development
-trigger:
+trigger: 
   branches:
     include:
-    - qa
-    
-
-    
+    - qa 
+       
 steps:
-
 - template: azure-pipelines-qa.yml
 
 
